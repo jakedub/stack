@@ -1,0 +1,14 @@
+<h2>Showing the Question</h2>
+
+<p>
+  <strong>Subject</strong>
+  <%= @question.subject %>
+</p>
+
+<p>
+  <strong>Field</strong>
+  <%= @question.field %>
+</p>
+
+<%= link_to 'Back', questions_path %>
+<%= link_to 'Edit', edit_question_path(question) %>

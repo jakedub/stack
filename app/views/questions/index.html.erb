@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="jumbotron bg-dark">
+  <h1>Index Page</h1>
+  </div>
+  <div class="table-responsive">
+<table class="table table-striped">
+  <div class="row">
+  <thead>
+    <tr>
+      <div class= "col-md-6">
+      <th>Question Subject Line</th>
+      </div>
+      <div class= "col-md-6">
+      <th>Question Field</th>
+      </div>
+      <div class=" col-mid-6 col-md-offset-6"><%= link_to 'New Question', new_question_path %></div>
+    </tr>
+  </thead>
+</div>
+  <div class ="row">
+  <tbody>
+    <% @question.each do |question| %>
+      <tr>
+        <td><%= question.subject %></td>
+        <td><%= question.field %></td>
+        <td><%= link_to 'Show', questions_path %></td>
+        <td><%= link_to 'Edit', edit_questions_path(question) %></td>
+        <td><%= link_to 'Destroy', link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  </div>
+</table>
+</div>
+</div>
