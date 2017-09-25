@@ -3,7 +3,7 @@
   <h1>Index Page</h1>
   </div>
   <div class="table-responsive">
-<table class="table table-striped">
+<table class="table table-striped table-hover">
   <div class="row">
   <thead>
     <tr>
@@ -13,7 +13,7 @@
       <div class= "col-md-6">
       <th>Question Field</th>
       </div>
-      <div class=" col-mid-6 col-md-offset-6"><%= link_to 'New Question', new_question_path %></div>
+      <div class=" col-mid-6 col-md-offset-6"><%= link_to 'New Question', new_question_path, :class => "btn btn-primary" %></div>
     </tr>
   </thead>
 </div>
@@ -22,14 +22,15 @@
     <% @question.each do |question| %>
       <tr>
         <td><%= question.subject %></td>
-        <td><%= question.field %></td>
-        <td><%= link_to 'Show', questions_path %></td>
-        <td><%= link_to 'Edit', edit_questions_path(question) %></td>
-        <td><%= link_to 'Destroy', link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= markdown(question.field) %></td>
+        <td><%= link_to 'Show', question_path(question), :class => "btn btn-info" %></td>
+        <td><%= link_to 'Edit', edit_question_path(question),  :class => "btn btn-success" %></td>
+        <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' },  :class => "btn btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>
   </div>
 </table>
+<%= paginate @question %>
 </div>
 </div>

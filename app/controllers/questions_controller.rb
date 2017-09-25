@@ -2,10 +2,7 @@ class QuestionsController < ApplicationController
 
   def index
     @question = Question.all
-  end
-
-  def show
-    @question = Question.find(params[:id])
+    @question = Question.order(:subject).page params[:page]
   end
 
   def new
@@ -13,9 +10,9 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question(question_params)
+    @question = Question.new(question_params)
     if @question.save
-      redirect_to @question
+      redirect_to :root
     else
       render 'new'
     end
@@ -26,14 +23,22 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    @question.update = Question.(question_params)
-    @question.save
-    redirect_to 'root'
+    @question = Question.find(params[:id])
+      if @question.update(question_params)
+        redirect_to @question
+      else
+        render 'edit'
+      end
+  end
+
+  def show
+      @question = Question.find(params[:id])
   end
 
   def destroy
     @question = Question.find(params[:id])
     @question.destroy
+    redirect_to :root
   end
 
   private

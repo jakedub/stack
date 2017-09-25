@@ -1,24 +1,24 @@
-<%= form_with(model: @questions, local: true) do |form| %>
+<%= form_for @question do |form| %>
 
 <form class="form-horizontal">
   <div class="form-group">
-  <div class="field col-sm-10">
+  <div class="field col-md-6">
     <%= form.label :subject %>
     <%= form.text_field :subject %>
   </div>
 </div>
 
   <div class="form-group">
-    <div class="field col-sm-10"rows="3">
+    <div class="field col-md-6"rows="3">
     <%= form.label :field %>
-    <%= form.text_field :field %>
+    <%= form.text_area :field %>
   </div>
 </div>
 
   <div class="form-group">
   <div class="actions col-sm-offset-2 col-sm-10" >
-    <%= form.submit %>
-    <%= link_to 'Back', questions_path %>
+    <%= form.submit :class => "btn btn-default" %>
+    <%= link_to 'Back', questions_path, :class => "btn btn-default" %>
   </div>
   </div>
 <% end %>
