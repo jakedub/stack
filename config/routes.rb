@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   # # delete
   # delete '/questions/:id' => 'questions#destroy'
   #delete user session
+  get '/answers/toggle/:id' => 'answers#toggle', as: :toggle
   delete '/sessions' => 'sessions#destroy', as: :destroy_user_session
 
   # root to: 'sessions#new'
@@ -24,5 +25,7 @@ Rails.application.routes.draw do
   resources :users
 
   # root 'questions#index'
-  resources :questions
+  resources :questions do
+    resources :answers
+  end
 end

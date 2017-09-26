@@ -41,6 +41,8 @@ class QuestionsController < ApplicationController
     redirect_to :root
   end
 
+
+
   private
 
   def question_params
