@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
 
   def index
     @question = Question.all
-    @question = Question.order(:subject).page params[:page]
+    @question = Question.order(totalcount: :DESC).page params[:page]
   end
 
   def new
@@ -12,6 +12,7 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.new(question_params)
+    @question.user = current_user
     if @question.save
       redirect_to :root
     else
@@ -39,7 +40,21 @@ class QuestionsController < ApplicationController
     redirect_to :root
   end
 
+  def vote
+      @question = Question.find(params[:question_id])
+      @question.votes << Vote.create!(user_id: @question.user_id, question_id: @question.id)
+      @question.totalcount = @question.votes.count
+      @question.save
+      redirect_to :root
+    end
 
+    def down_vote
+      @question = Question.find(params[:question_id])
+      @question.votes.last.destroy
+      @question.totalcount = @question.votes.count
+      @question.save
+      redirect_to :root
+    end
 
   private
 

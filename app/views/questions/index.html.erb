@@ -1,36 +1,74 @@
-<div class="container">
-  <div class="jumbotron bg-dark">
-  <h1>Fake Stack</h1>
-  </div>
-  <div class="table-responsive">
-<table class="table table-striped table-hover">
+<div class="container-fluid">
   <div class="row">
-  <thead>
-    <tr>
-      <div class= "col-md-4">
-      <th>Question Subject Line</th>
-      <div class=" col-md-4 col-md-offset-9"><%= link_to 'New Question', new_question_path, :class => "btn btn-primary" %>
-      <%= link_to "Log out", destroy_user_session_path, method: :delete, :class => "btn btn-warning" %>
-      <%= link_to "Sign In", new_session_path, :class => "btn btn-success" %>
+  <div id="main" class="jumbotron bg-dark">
+  <h1>Fake Stack</h1>
+  <h3>Where instead of questions you get Harry Potter Characters and Locations!</h3>
+    <nav>
+    <div class="row col-md-offset-9">
+      <%= link_to 'New Question', new_question_path, :class => "btn btn-primary active" %>
+      <%= link_to "Log out", destroy_user_session_path, method: :delete, :class => "btn btn-warning active" %>
+      <%= link_to "Sign In", new_session_path, :class => "btn btn-success active" %> </div>
+    </nav>
     </div>
+  </div>
+
+
+<div class="row">
+  <div class="col-md-4">
+        <div class="row">
+            <img class="img" src="https://media.giphy.com/media/l0HlOrRj8sqK1xiJa/giphy.gif" width="400"/>
+          </div><br />
+        <div class="row">
+          <img class="img" src="https://media.giphy.com/media/9Qgwns9M3Hf6U/giphy.gif" />
+        </div><br />
+        <div class="row">
+          <img class="img" src="https://media.giphy.com/media/pJaAgsUrNCyRy/giphy.gif" />
+        </div>
+  </div>
+
+  <div class="col-md-8">
+
+    <div class="row">
+    <table class="table table-striped table-hover table-responsive table-bordered">
+      <thead>
+    <tr>
+        <th>Total Votes</th>
+        <th>Up Vote</th>
+        <th>Down Vote</th>
+      <th>Question Subject Line</th>
     </tr>
-  </thead>
-</div>
-  <div class ="row">
+    </thead>
+
   <tbody>
     <% @question.each do |question| %>
       <tr>
-        <div class="col-md-8">
+          <td><%= question.totalcount %></td>
+          <td><%= link_to "UP", question_vote_path(question) %></td>
+          <td><%= link_to "DOWN", question_down_vote_path(question) %></td>
         <td><strong><%=link_to question.subject, question_path(question) %></strong>
           <p>Asked by User: </p><%= question.user.name %> <br />
+          <% if question.user == current_user %>
         <%= link_to 'Edit', edit_question_path(question),  :class => "btn btn-success btn-xs" %>
-      <%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' },  :class => "btn btn-danger btn-xs" %></td>
-        </div>
+        <%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' },  :class => "btn btn-danger btn-xs" %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
-  </div>
 </table>
+</div>
+</div>
+
+
+
+
+
+
+
 <%= paginate @question %>
 </div>
+
+
+
+
+
 </div>

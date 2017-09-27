@@ -16,3 +16,13 @@
 ul {
   list-style-type: none;
 }
+
+#main{
+  background-color: green;
+  color: white;
+}
+
+#new{
+  color: white;
+  background-color: blue;
+}

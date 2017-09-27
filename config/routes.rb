@@ -29,5 +29,8 @@ Rails.application.routes.draw do
   # root 'questions#index'
   resources :questions do
     resources :answers, except: [:delete]
+    get :vote
+    get :link_vote
+    get :down_vote
   end
 end

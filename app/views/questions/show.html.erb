@@ -13,8 +13,14 @@
     <% if a.correct == true %>
     <span class="glyphicon glyphicon-ok"></span>
     <% end %>
-    <%= link_to "Correct", toggle_path(a) , :class => "btn btn-primary btn-xs" %>
+
+    <% if @question.user == current_user %>
+    <%= link_to "Correct", toggle_path(a) , :class => "btn btn-primary btn-xs active" %>
+    <%end %>
+
+    <% if current_user %>
     <%= link_to "Delete", destroy_answer_path(a), method: :delete, :class => "btn btn-danger btn-xs" %>
+      <%end %>
     <% end %>
   <% else %>
     <h3>Bueller?</h3>
@@ -22,14 +28,13 @@
   </li>
 </ul>
 <% else %>
-
+<%= link_to "Log in", new_session_path(@question),  :class => "btn btn-success" %>
+<% end %>
 
 <%= form_for [@question, Answer.new] do |f| %>
 <%= f.label :field %>
 <%= f.text_area :field %>
 <%= f.submit "Submit Answer"%>
-<% end %>
-<%= link_to "Log in", new_session_path(@question),  :class => "btn btn-success" %>
 <% end %>
 <%= link_to 'Back', questions_path, :class => "btn btn-default" %>
 <%= link_to 'Edit', edit_question_path(@question),  :class => "btn btn-default" %>
