@@ -1,30 +1,36 @@
-<h1>Question Subject Line:
+<div class="container">
+  <h1>Question Subject Line:
   <%=@question.subject %></h1>
 <h2>Question Body:
   <%=@question.field%></h2>
-
+<% if current_user %>
 <ul>
   <li>
     <% if @question.answers.count > 0 %>
-      <% @question.answers.each do |a| %>
-        <h3>I think it's this!:</h3>
-        <%= a.field %>
-          <% if a.correct == true %>
-              <h1>Yes!</h1>
-          <% end %>
-        <%= link_to "Correct", toggle_path(a) %>
-        <% end %>
-
-    <% else %>
-        <h3>Bueller?</h3>
+    <% @question.answers.each do |a| %>
+    <h3>I think it's this!:</h3>
+    <%= a.field %>
+    <% if a.correct == true %>
+    <span class="glyphicon glyphicon-ok"></span>
+    <% end %>
+    <%= link_to "Correct", toggle_path(a) , :class => "btn btn-primary btn-xs" %>
+    <%= link_to "Delete", destroy_answer_path(a), method: :delete, :class => "btn btn-danger btn-xs" %>
+    <% end %>
+  <% else %>
+    <h3>Bueller?</h3>
     <% end %>
   </li>
 </ul>
+<% else %>
+
 
 <%= form_for [@question, Answer.new] do |f| %>
 <%= f.label :field %>
 <%= f.text_area :field %>
 <%= f.submit "Submit Answer"%>
 <% end %>
+<%= link_to "Log in", new_session_path(@question),  :class => "btn btn-success" %>
+<% end %>
 <%= link_to 'Back', questions_path, :class => "btn btn-default" %>
 <%= link_to 'Edit', edit_question_path(@question),  :class => "btn btn-default" %>
+</div>

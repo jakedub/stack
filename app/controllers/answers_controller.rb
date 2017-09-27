@@ -1,6 +1,7 @@
 class AnswersController < ApplicationController
+  before_action :set_answer, only: [:show, :edit, :update, :destroy]
 def show
-  @answer = Answer.find(params[:id])
+
 end
 
 def new
@@ -8,11 +9,11 @@ def new
 end
 
 def edit
-  @answer = Answer.find(params[:id])
+
 end
 
 def update
-  @answer = Answer.find(params[:id])
+
   @answer.update(answer_params)
 end
 
@@ -35,7 +36,18 @@ def toggle
     redirect_to @answer.question
 end
 
+def destroy
+  @question = @answer.question
+  @answer.destroy
+
+  redirect_to @question
+end
+
 private
+def set_answer
+      @answer = Answer.find(params[:id])
+    end
+
 def answer_params
 params.require(:answer).permit(:field, :correct)
 end

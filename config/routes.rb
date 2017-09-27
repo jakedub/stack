@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :votes
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # root
   root 'questions#index'
@@ -15,10 +16,11 @@ Rails.application.routes.draw do
   # # update
   # put '/questions/:id' => 'questions#update'
   # # delete
-  # delete '/questions/:id' => 'questions#destroy'
+  delete '/answers/delete/:id' => 'answers#destroy', as: :destroy_answer
   #delete user session
   get '/answers/toggle/:id' => 'answers#toggle', as: :toggle
   delete '/sessions' => 'sessions#destroy', as: :destroy_user_session
+
 
   # root to: 'sessions#new'
   resources :sessions, only: [:new, :create]
@@ -26,6 +28,6 @@ Rails.application.routes.draw do
 
   # root 'questions#index'
   resources :questions do
-    resources :answers
+    resources :answers, except: [:delete]
   end
 end

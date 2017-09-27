@@ -4,6 +4,7 @@ class User < ApplicationRecord
   validates_format_of :email, with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
   has_many :answers
   has_many :questions
+  has_many :votes
 
   private
 
