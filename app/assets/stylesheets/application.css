@@ -26,3 +26,13 @@ ul {
   color: white;
   background-color: blue;
 }
+
+#signup{
+  color: white;
+  background-color: purple;
+}
+
+form{
+  font-size: 20px;
+  padding-top: 10px;
+}

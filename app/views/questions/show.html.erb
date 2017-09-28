@@ -1,41 +1,54 @@
 <div class="container">
-  <h1>Question Subject Line:
-  <%=@question.subject %></h1>
-<h2>Question Body:
-  <%=@question.field%></h2>
-<% if current_user %>
-<ul>
-  <li>
-    <% if @question.answers.count > 0 %>
-    <% @question.answers.each do |a| %>
-    <h3>I think it's this!:</h3>
-    <%= a.field %>
-    <% if a.correct == true %>
-    <span class="glyphicon glyphicon-ok"></span>
-    <% end %>
+  <div class="jumbotron">
+    <h1>Showing Off the Question</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Subject:</h2>
+      <span><%=@question.subject %>
+      </span>
+    </div>
+    <div class="col-md-6">
+      <h2>Question:</h2>
+      <span><%=@question.field%></span>
+    </div>
+  </div>
+  <% if current_user %>
+  <ul>
+    <li>
+      <% if @question.answers.count > 0 %>
+      <% @question.answers.each do |a| %>
+      <h3>I think it's this!:</h3>
+      <%= a.field %>
+      <% if a.correct == true %>
+      <span class="glyphicon glyphicon-ok"></span>
+      <% end %>
 
-    <% if @question.user == current_user %>
-    <%= link_to "Correct", toggle_path(a) , :class => "btn btn-primary btn-xs active" %>
-    <%end %>
-
-    <% if current_user %>
-    <%= link_to "Delete", destroy_answer_path(a), method: :delete, :class => "btn btn-danger btn-xs" %>
+      <% if @question.user == current_user %>
+      <%= link_to "Correct", toggle_path(a) , :class => "btn btn-primary btn-xs active" %>
       <%end %>
-    <% end %>
-  <% else %>
-    <h3>Bueller?</h3>
-    <% end %>
-  </li>
-</ul>
-<% else %>
-<%= link_to "Log in", new_session_path(@question),  :class => "btn btn-success" %>
-<% end %>
 
-<%= form_for [@question, Answer.new] do |f| %>
-<%= f.label :field %>
-<%= f.text_area :field %>
-<%= f.submit "Submit Answer"%>
-<% end %>
-<%= link_to 'Back', questions_path, :class => "btn btn-default" %>
-<%= link_to 'Edit', edit_question_path(@question),  :class => "btn btn-default" %>
+      <% if current_user %>
+      <%= link_to "Delete", destroy_answer_path(a), method: :delete, :class => "btn btn-danger btn-xs" %>
+      <%end %>
+      <% end %>
+    <% else %>
+      <h3>Bueller?</h3>
+      <% end %>
+    </li>
+  </ul>
+<div class="row">
+  <div class="col-md-12">
+  <%= form_for [@question, Answer.new] do |f| %>
+  <%= f.label :field %>
+  <%= f.text_area :field %> <br />
+  <%= f.submit "Submit Answer", :class=> "btn btn-primary"%><br /><br />
+  <% end %>
+  <%= link_to 'Back', questions_path, :class => "btn btn-primary active" %>
+  <%= link_to 'Edit', edit_question_path(@question),  :class => "btn btn-info active" %>
+  <% else %>
+  <%= link_to "Log in", new_session_path(@question),  :class => "btn btn-success active" %>
+  <% end %>
+  </div>
+</div>
 </div>
