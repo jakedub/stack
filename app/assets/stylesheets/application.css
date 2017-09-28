@@ -36,3 +36,16 @@ form{
   font-size: 20px;
   padding-top: 10px;
 }
+
+#register{
+  color: white;
+  background-color: gray;
+}
+
+#reg_form{
+  font-size: 20px;
+}
+
+body{
+  font-family: Georgia, Times, Helvetica;
+}

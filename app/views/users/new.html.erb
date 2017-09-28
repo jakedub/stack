@@ -1,18 +1,76 @@
-<h1>Signup!</h1>
+<div id="zombie" class="container-fluid">
+    <div id="register" class="jumbotron">
+      <div class="row">
+        <div class="col-md-8">
+      <h1>Become One Of Us!</h1>
+      <div class="row">
+        <div class="col-md-12">
+      <ul>
+        <li>One of us!</li>
+        <li>One of us!</li>
+        <li>One of us!</li>
+        <li>One of us!</li>
+        <li>One of us!</li>
+        <li>One of us!</li>
+      </ul>
+      </div>
+      </div>
+      </div>
+      <div class="col-md-4">
+        <img class="image-fluid"src="http://neveryetmelted.com/wp-content/uploads/2016/02/AngryMob.jpg" />
+      </div>
+      </div>
 
-<% if @user.errors.any? %>
-  <h2>Please correct the problems below before signing up.</h2>
-  <ul>
-    <% @user.errors.full_messages.each do |msg| %>
+    </div>
+  <div class="row">
+    <% if @user.errors.any? %>
+    <h2>Please correct the problems below before signing up.</h2>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
+      <% end %>
+    </ul>
     <% end %>
-  </ul>
-<% end %>
-<%= form_for :user, url: users_path do |f| %>
-  Email: <%= f.text_field :email %>
-  Password: <%= f.password_field :password %>
-  Password Confirmation: <%= f.password_field :password_confirmation %>
-  <%= f.submit "Sign me up" %>
-<% end %>
-
-<%= link_to 'Back', new_session_path %>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <img src="http://www.weatherzombie.com/zimages/zombies/genericZombieMale.png" alt="zombie" /></img>
+    </div>
+    <div class="form-inline">
+      <div class="form-group">
+        <div class="col-md-6 col-md-offset-4" id="reg_form">
+          <div class="row">
+            <div class="col-md-6">
+              <%= form_for :user, url: users_path do |f| %>
+              Email:
+              <%= f.text_field :email %>
+            </div>
+          </div> <br />
+          <div class="row">
+            <div class="col-md-6">
+              Password:
+              <%= f.password_field :password %>
+            </div>
+          </div><br />
+          <div class="row">
+            <div class="col-md-6">
+              Password Confirmation:
+              <%= f.password_field :password_confirmation %>
+            </div>
+          </div><br />
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.submit "Sign me up", :class => 'btn btn-primary active' %> <br /><br />
+              <%= link_to 'Back', new_session_path, :class => 'btn btn-primary active' %>
+            </div>
+          </div>
+          <% end %>
+        </form>
+        <!-- column -->
+      </div>
+      <!-- form group -->
+    </div>
+    <!-- form inline -->
+  </div>
+  <!-- Row for the main container -->
+</div>

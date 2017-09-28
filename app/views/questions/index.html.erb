@@ -16,7 +16,7 @@
 <div class="row">
   <div class="col-md-4">
         <div>
-            <img class="img" src="https://media.giphy.com/media/l0HlOrRj8sqK1xiJa/giphy.gif"/>
+            <img class="img" src="https://media.giphy.com/media/7cHJRCvd28ETe/giphy.gif"/>
           </div><br />
         <div>
           <img class="img" src="https://media.giphy.com/media/9Qgwns9M3Hf6U/giphy.gif" />
@@ -36,6 +36,7 @@
         <th>Up Vote</th>
         <th>Down Vote</th>
       <th>Question Subject Line</th>
+      <i class="glyphicon glyphicon-plus-sign">
     </tr>
     </thead>
 
@@ -43,8 +44,8 @@
     <% @question.each do |question| %>
       <tr>
           <td><%= question.totalcount %></td>
-          <td><%= link_to "UP", question_vote_path(question) %></td>
-          <td><%= link_to "DOWN", question_down_vote_path(question) %></td>
+          <td><%= link_to "UP", question_vote_path(question), :class =>"glyphicon glyphicon-plus-sign btn-lg" %></td>
+          <td><%= link_to "DOWN", question_down_vote_path(question), :class => "glyphicon glyphicon-minus-sign btn-lg" %></td>
         <td><strong><%=link_to question.subject, question_path(question) %></strong>
           <p>Asked by User: </p><%= question.user.name %> <br />
           <% if question.user == current_user %>
